@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Project.Models.Vender>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#searchtxt").autocomplete({
+            source: '@Url.Action("GetVenders")'
+        });
+    });
+</script>
+
+<h2>Vender List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <div class="input-group">
+
+
+        <div class="col-md-6">
+            <input type="text" name="searchtxt" id="searchtxt" class="form-control" placeholder="search your text here" style="max-width: 100%" />
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" type="submit">search</button>
+
+        </div>
+    </div>
+}
+<br /><br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Organization)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vender_Type)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Founded)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("Delete", "Home", new { id = item.Id }))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vender_Type)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Founded)
+                </td>
+                <td>
+                <td>
+
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+
+                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete record of @item.Organization');" />
+
+                </td>
+                </td>
+
+
+            </tr>
+        }
+    }
+
+</table>
+
+
+
+@{
+     var totalpages = ViewBag.totalpages;
+
+    
+        <nav aria-label="Page navigation example">
+            <ul class="pagination breadcrumb justify-content-end">
+                @for (int i = 1; i <= totalpages; i++)
+                {
+                    <li class="breadcrumb-item">
+
+                        @Html.ActionLink(i.ToString(), "Index", new { SortOrder = ViewBag.SortOrder == null ? "ASC" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Name" : ViewBag.SortBy, PageNumber = i })
+                    
+
+                    </li>
+                }
+            </ul>
+        </nav>
+
+}
+       
+
+
+
+
+
+
+
+
+
+
+
+
+

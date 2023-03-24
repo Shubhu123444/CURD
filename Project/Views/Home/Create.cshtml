@@ -1,0 +1,142 @@
+﻿@model Project.Models.Vender
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@ViewBag.issucess
+<script type="text/javascript">
+    $(function () {
+        $(".country").autocomplete({
+            source: '@Url.Action("GetCountry")'
+        });
+    });
+</script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $(".type").autocomplete({
+            source: ["Internal vender", "External vender", "TC vender"]
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $(".City").autocomplete({
+            source: ["Delhi", "Bangalore", "Visakhapatnam", "Hyderabad", "Lucknow","Indore", "Pune", "Ahmedabad", "Surat", "Mumbai", "Chennai","Nagpur", "Akola","Amravati", "Washim", "Solapur","Thane","NCR","Jadgaon", "Yavatmal"]
+        });
+    });
+</script>
+
+
+
+<script>
+    $(function () {
+        $(".datetimepicker").datepicker();
+    });
+</script>
+
+
+<h3>Add Vender</h3>
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="form-group col col-5">
+            <strong>@Html.LabelFor(model => model.Organization, htmlAttributes: new { @class = "control-label col-md-2" })</strong>
+            
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Organization, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Organization, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col">
+            <strong> @Html.LabelFor(model => model.Vender_Type, htmlAttributes: new { @class = "control-label col-md-2 " })</strong>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vender_Type, new { htmlAttributes = new { @class = "form-control type" } })
+                @Html.ValidationMessageFor(model => model.Vender_Type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <div class="row">
+        <div class="form-group col col-5">
+            <strong> @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })</strong>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control City" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col">
+            <strong>    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })</strong>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control country" } })
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+        
+    <di v class="row">
+        <div class="form-group col col-5">
+            <strong>    @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })</strong>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col">
+            <strong>@Html.LabelFor(model => model.Founded, htmlAttributes: new { @class = "control-label col-md-2" })</strong>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Founded, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                @Html.ValidationMessageFor(model => model.Founded, "", new { @class = "text-danger" })
+            </div>
+        </div>
+</div>
+
+        <br />
+        <div class="form-group row">
+            <div class="col-md-offset-2  col-sm-1">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+            <div class="col">
+                @using (Html.BeginForm("Index", "Home"))
+                {
+                     <input type="button" value="Back" class="btn btn-outline-primary" />
+                }
+            </div>
+        </div>
+}
+<br />
+
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
